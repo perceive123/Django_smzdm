@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>什么值得买_手机短评</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">-->
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <script src="../static/js/jquery.slim.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/shorts/index">首页</a>
+        <a class="navbar-brand" href="/accounts/signup">注册</a>
+        <a class="navbar-brand" href="/accounts/login">登录</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="搜索">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        </form>
+    </nav>
+    <div class="container main_wrap clearfix">
+        <h3 class="mt-5 mb-3">什么值得买_24小时排行前十手机短评的情感分析</h3>
+<!--        <div class="sort_bar"></div>-->
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">手机型号</th>
+                <th scope="col">短评</th>
+                <th scope="col" class="text-nowrap">情感评分</th>
+                <th scope="col">评论时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <ul class="goods_type_list clearfix">
+                    {%for info in page_data%}
+                    <tr>
+                        <th> {{info.id}} </th>
+                        <th> {{info.title}} </th>
+                        <td> {{info.comment}} </td>
+                        <td> {{info.sentiment}} </td>
+                        <td class="text-nowrap"> {{info.time}} </td>
+                    </tr>
+                    {%endfor%}
+                </ul>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagenation">
+        {% if page_data.has_previous %}
+        <a href="?page={{ page_data.previous_page_number }}&q={{q}}">上一页</a>
+        {% endif %}
+
+        {% for index in paginator.page_range %}
+            {% if index == page_data.number %}
+                <a href="?page={{ index }}&q={{q}}" class="active">{{ index }}</a>
+            {% else %}
+                <a href="?page={{ index }}&q={{q}}">{{ index }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_data.has_next %}
+        <a href="?page={{ page_data.next_page_number }}&q={{q}}">下一页></a>
+        {% endif %}
+    </div>
+</body>
+</html>
