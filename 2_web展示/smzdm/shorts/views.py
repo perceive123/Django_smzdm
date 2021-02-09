@@ -28,10 +28,17 @@ def phone_index(request):
 
 # @login_required
 def phone_shorts(request):
+    q = request.GET.get('q', '')
     infos = Phone.objects.filter(sentiment__gt=0.5).order_by('-sentiment')  # 倒序
     if 'q' in request.GET:
-        infos = Phone.objects.filter(comment__contains=request.GET.get(
+        infos = infos.filter(comment__contains=request.GET.get(
             'q')).order_by('-sentiment')  # 写法2  infos = Shorts.objects.filter(shorts__contains=request.GET['q'])
+    # 获取当前页码
+    page_id = request.GET.get('page', 1)
+    # 数据分页
+    paginator = Paginator(infos, 30)
+    # 获取当前页码数据
+    page_data = paginator.page(page_id)
     return render(request, 'phone_shorts.html', locals())
 
 
