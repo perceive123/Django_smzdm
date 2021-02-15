@@ -6,41 +6,33 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
-
-# Create your views here.
-
 @login_required
 def phone_index(request):
     #判断是否有查询数据
     q=request.GET.get('q','')
     if q!='':
-        infos = Phone.objects.filter(comment__contains=request.GET.get(
-            'q'))
+        infos = Phone.objects.filter(comment__contains=q)
     else:
-        infos = Phone.objects.all()  # .order_by('-sentiment')
+        infos = Phone.objects.all() #.order_by('-sentiment')
+    #评论数量
+    count_comment=infos.count()
+    #正向评论数
+    count_comment_positive=infos.filter(sentiment__gte=0.5).count()
+    if count_comment:
+        percent_comment_positive=round(count_comment_positive/count_comment*100,2)
+    else:
+        percent_comment_positive=0
+    #负向评论数
+    count_comment_negative=count_comment-count_comment_positive
+    percent_comment_negative=100-percent_comment_positive
     # 获取当前页码
     page_id=request.GET.get('page',1)
     # 数据分页
     paginator = Paginator(infos, 30)
     # 获得当前页码数据
     page_data = paginator.page(page_id)
-    return render(request, 'phone_shorts.html', locals())
 
-# @login_required
-def phone_shorts(request):
-    q = request.GET.get('q', '')
-    infos = Phone.objects.filter(sentiment__gt=0.5).order_by('-sentiment')  # 倒序
-    if 'q' in request.GET:
-        infos = infos.filter(comment__contains=request.GET.get(
-            'q')).order_by('-sentiment')  # 写法2  infos = Shorts.objects.filter(shorts__contains=request.GET['q'])
-    # 获取当前页码
-    page_id = request.GET.get('page', 1)
-    # 数据分页
-    paginator = Paginator(infos, 30)
-    # 获取当前页码数据
-    page_data = paginator.page(page_id)
     return render(request, 'phone_shorts.html', locals())
-
 
 def login2(request):
     if request.method == 'GET':

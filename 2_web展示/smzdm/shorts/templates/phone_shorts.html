@@ -11,17 +11,86 @@
     <script src="../static/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/shorts/index">首页</a>
-        <a class="navbar-brand" href="/accounts/signup">注册</a>
-        <a class="navbar-brand" href="/accounts/login">登录</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" name="q" type="search" placeholder="搜索">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-        </form>
-    </nav>
+<!--    <nav class="navbar navbar-dark bg-dark">-->
+<!--        <a class="navbar-brand" href="/shorts/index">首页</a>-->
+<!--        <form class="form-inline">-->
+<!--            <input class="form-control mr-sm-2" name="q" type="search" placeholder="搜索">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>-->
+<!--        </form>-->
+<!--        <div>-->
+<!--            <a href="/users/login/" style="color:#FF5000" >亲，请登录</a>&nbsp;&nbsp;-->
+<!--            <a href="/users/register/" style="color:#6C6C6C" >免费注册</a>-->
+<!--        </div>-->
+<!--    </nav>-->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/shorts/index">首页</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/accounts/signup">注册<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/accounts/login">登录</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+          </div>
+        </nav>
+    </div>
+    <div style="height:30px;"></div>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card alert-success shadow">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>评论总数</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>{{count_comment}}</h3>
+                        <h4>(100%)</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card alert-warning shadow">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>正向评论</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>{{count_comment_positive}}</h3>
+                        <h4>({{percent_comment_positive}}%)</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card alert-danger shadow">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>负向评论</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>{{count_comment_negative}}</h3>
+                        <h4>({{percent_comment_negative}}%)</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:5px;"></div>
     <div class="container main_wrap clearfix">
-        <h3 class="mt-5 mb-3">什么值得买_24小时排行前十手机短评的情感分析</h3>
+        <h3 class="mt-5 mb-3">什么值得买_手机短评情感分析</h3>
 <!--        <div class="sort_bar"></div>-->
         <table class="table">
             <thead class="thead-light">
