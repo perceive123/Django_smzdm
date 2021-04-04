@@ -59,14 +59,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# 邮箱设定
-EMAIL_HOST = 'smtp.163.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = '15757171003@163.com' # 你的 QQ 账号和授权码
-EMAIL_HOST_PASSWORD = 'GJXGKCTLDJNORFUT'
-EMAIL_USE_TLS = True  # 这里必须是 True，否则发送不成功
-EMAIL_FROM = '15757171003@163.com' # 你的 QQ 账号
-DEFAULT_FROM_EMAIL = '15757171003@163.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
